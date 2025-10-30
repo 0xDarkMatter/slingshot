@@ -11,10 +11,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Comprehensive test suite with pytest
 - Test coverage reporting
 - pytest configuration in pyproject.toml
+- py.typed marker for type hint support
 
 ### Changed
 - Updated author information in pyproject.toml
 - Enhanced development dependencies (pytest-cov, responses)
+- Migrated to src/ layout for better package isolation
+- Consolidated dependency management in pyproject.toml
+- Updated requirements.txt and requirements-dev.txt to reference pyproject.toml
 
 ## [0.1.0] - 2024-10-30
 

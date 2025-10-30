@@ -44,7 +44,7 @@ dev = [
 cfworker = "cfworker.cli:main"
 
 [tool.setuptools.packages.find]
-where = ["."]
+where = ["src"]
 include = ["cfworker*"]
 
 [tool.black]
