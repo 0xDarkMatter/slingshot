@@ -4,12 +4,12 @@ import json
 import pytest
 from pathlib import Path
 
-from cfworker.config import Config
+from slingshot.config import Config
 
 
 def test_config_create_default(temp_dir):
     """Test creating a default configuration."""
-    config_path = temp_dir / ".cfworker.json"
+    config_path = temp_dir / ".slingshot.json"
     config = Config.create_default("my-worker", str(config_path))
 
     assert config_path.exists()
@@ -20,7 +20,7 @@ def test_config_create_default(temp_dir):
 
 def test_config_load(temp_dir, sample_config):
     """Test loading configuration from file."""
-    config_path = temp_dir / ".cfworker.json"
+    config_path = temp_dir / ".slingshot.json"
     with open(config_path, 'w') as f:
         json.dump(sample_config, f)
 
@@ -33,7 +33,7 @@ def test_config_load(temp_dir, sample_config):
 
 def test_config_save(temp_dir, sample_config):
     """Test saving configuration to file."""
-    config_path = temp_dir / ".cfworker.json"
+    config_path = temp_dir / ".slingshot.json"
     config = Config(str(config_path))
     config.save(sample_config)
 
@@ -45,7 +45,7 @@ def test_config_save(temp_dir, sample_config):
 
 def test_config_get_set(temp_dir):
     """Test getting and setting configuration values."""
-    config = Config.create_default("test-worker", str(temp_dir / ".cfworker.json"))
+    config = Config.create_default("test-worker", str(temp_dir / ".slingshot.json"))
 
     config.set("test_key", "test_value")
     assert config.get("test_key") == "test_value"
@@ -54,7 +54,7 @@ def test_config_get_set(temp_dir):
 
 def test_config_credentials(temp_dir, mock_env_credentials):
     """Test reading credentials from environment."""
-    config = Config(str(temp_dir / ".cfworker.json"))
+    config = Config(str(temp_dir / ".slingshot.json"))
 
     assert config.account_id == "test_account_id"
     assert config.api_token == "test_api_token"
@@ -62,7 +62,7 @@ def test_config_credentials(temp_dir, mock_env_credentials):
 
 def test_config_validate_success(temp_dir, mock_env_credentials, sample_worker_script):
     """Test successful configuration validation."""
-    config = Config.create_default("test-worker", str(temp_dir / ".cfworker.json"))
+    config = Config.create_default("test-worker", str(temp_dir / ".slingshot.json"))
 
     # Create worker script
     worker_path = temp_dir / "worker.js"
@@ -83,7 +83,7 @@ def test_config_validate_success(temp_dir, mock_env_credentials, sample_worker_s
 
 def test_config_validate_missing_credentials(temp_dir):
     """Test validation with missing credentials."""
-    config = Config.create_default("test-worker", str(temp_dir / ".cfworker.json"))
+    config = Config.create_default("test-worker", str(temp_dir / ".slingshot.json"))
 
     is_valid, errors = config.validate()
     assert is_valid is False
@@ -93,7 +93,7 @@ def test_config_validate_missing_credentials(temp_dir):
 
 def test_config_validate_missing_script(temp_dir, mock_env_credentials):
     """Test validation with missing worker script."""
-    config = Config.create_default("test-worker", str(temp_dir / ".cfworker.json"))
+    config = Config.create_default("test-worker", str(temp_dir / ".slingshot.json"))
 
     # Change to temp directory for validation
     import os

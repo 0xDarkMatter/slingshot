@@ -7,11 +7,11 @@ Get your first Cloudflare Worker deployed in 5 minutes!
 - Python 3.10 or higher
 - Cloudflare account (free tier works!)
 
-## Step 1: Install CFWorker
+## Step 1: Install Slingshot
 
 ```bash
-# Navigate to CFWorker directory
-cd CFWorker
+# Navigate to Slingshot directory
+cd Slingshot
 
 # Create virtual environment
 python -m venv venv
@@ -28,7 +28,7 @@ pip install -e .
 
 Verify installation:
 ```bash
-cfworker --version
+slingshot --version
 ```
 
 ## Step 2: Get Cloudflare Credentials
@@ -49,7 +49,7 @@ cfworker --version
 
 Run the setup wizard:
 ```bash
-cfworker config-setup
+slingshot config-setup
 ```
 
 Or create `.env` manually:
@@ -68,17 +68,17 @@ This prevents other users from reading your Cloudflare credentials.
 
 ```bash
 # Create a simple API worker
-cfworker init my-first-worker --template api
+slingshot init my-first-worker --template api
 ```
 
 This creates:
-- `.cfworker.json` - configuration
+- `.slingshot.json` - configuration
 - `worker.js` - your code
 
 ## Step 4: Deploy!
 
 ```bash
-cfworker deploy
+slingshot deploy
 ```
 
 That's it! Your worker is now live at:
@@ -118,9 +118,9 @@ Before moving forward, understand these security considerations:
 ### 3. Use Version Control
 ```bash
 # Commit before deploying
-git add worker.js .cfworker.json
+git add worker.js .slingshot.json
 git commit -m "Update worker implementation"
-cfworker deploy
+slingshot deploy
 ```
 
 This allows easy rollback if something goes wrong.
@@ -143,30 +143,30 @@ export default {
 
 Deploy again:
 ```bash
-cfworker deploy
+slingshot deploy
 ```
 
 ### Try Different Templates
 
 ```bash
 # Static website
-cfworker init my-site --template static
+slingshot init my-site --template static
 
 # Edge function
-cfworker init my-function --template edge
+slingshot init my-function --template edge
 ```
 
 ### Manage Your Workers
 
 ```bash
 # List all workers
-cfworker list
+slingshot list
 
 # Get worker details
-cfworker info
+slingshot info
 
 # Delete a worker
-cfworker delete
+slingshot delete
 ```
 
 ## Common Use Cases
@@ -175,27 +175,27 @@ cfworker delete
 Perfect for: Backend APIs, webhooks, microservices
 
 ```bash
-cfworker init my-api --template api
+slingshot init my-api --template api
 # Edit worker.js to add your endpoints
-cfworker deploy
+slingshot deploy
 ```
 
 ### 2. Static Website
 Perfect for: Landing pages, portfolios, documentation
 
 ```bash
-cfworker init my-site --template static
+slingshot init my-site --template static
 # Edit worker.js to customize HTML
-cfworker deploy
+slingshot deploy
 ```
 
 ### 3. Edge Function
 Perfect for: Data processing, redirects, A/B testing
 
 ```bash
-cfworker init my-function --template edge
+slingshot init my-function --template edge
 # Edit worker.js for your logic
-cfworker deploy
+slingshot deploy
 ```
 
 ## Tips
@@ -204,7 +204,7 @@ cfworker deploy
 
 Make changes to `worker.js`, then:
 ```bash
-cfworker deploy
+slingshot deploy
 ```
 
 Changes are live in seconds!
@@ -212,26 +212,26 @@ Changes are live in seconds!
 ### Validate Before Deploying
 
 ```bash
-cfworker deploy --dry-run
+slingshot deploy --dry-run
 ```
 
 ### Multiple Projects
 
-Each project needs its own directory with `.cfworker.json`:
+Each project needs its own directory with `.slingshot.json`:
 
 ```
 projects/
 ├── api-project/
-│   ├── .cfworker.json
+│   ├── .slingshot.json
 │   └── worker.js
 ├── website-project/
-│   ├── .cfworker.json
+│   ├── .slingshot.json
 │   └── worker.js
 ```
 
 ### Environment Variables
 
-Add to `.cfworker.json`:
+Add to `.slingshot.json`:
 ```json
 {
   "worker_name": "my-worker",
@@ -258,8 +258,8 @@ const apiKey = env.API_KEY;
 - Check you're in the right directory
 
 **"Worker name already exists"**
-- Change `worker_name` in `.cfworker.json`
-- Or delete the old worker: `cfworker delete`
+- Change `worker_name` in `.slingshot.json`
+- Or delete the old worker: `slingshot delete`
 
 ## Need Help?
 

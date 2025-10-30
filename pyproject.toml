@@ -3,9 +3,9 @@ requires = ["setuptools>=61.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "cfworker"
+name = "slingshot"
 version = "0.1.0"
-description = "A reusable module for deploying and managing Cloudflare Workers"
+description = "Rapidly deploy and manage Cloudflare Workers with minimal hassle"
 readme = "README.md"
 requires-python = ">=3.10"
 license = {text = "MIT"}
@@ -41,11 +41,11 @@ dev = [
 ]
 
 [project.scripts]
-cfworker = "cfworker.cli:main"
+slingshot = "slingshot.cli:main"
 
 [tool.setuptools.packages.find]
 where = ["src"]
-include = ["cfworker*"]
+include = ["slingshot*"]
 
 [tool.black]
 line-length = 100
@@ -62,7 +62,7 @@ python_classes = ["Test*"]
 python_functions = ["test_*"]
 addopts = [
     "--verbose",
-    "--cov=cfworker",
+    "--cov=slingshot",
     "--cov-report=term-missing",
     "--cov-report=html",
 ]

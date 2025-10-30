@@ -1,4 +1,4 @@
-"""Configuration management for CFWorker."""
+"""Configuration management for Slingshot."""
 
 import json
 import os
@@ -15,9 +15,9 @@ class Config:
         """Initialize configuration.
 
         Args:
-            config_path: Path to .cfworker.json file. Defaults to current directory.
+            config_path: Path to .slingshot.json file. Defaults to current directory.
         """
-        self.config_path = Path(config_path) if config_path else Path.cwd() / ".cfworker.json"
+        self.config_path = Path(config_path) if config_path else Path.cwd() / ".slingshot.json"
         self.config_data: Dict[str, Any] = {}
 
         # Load environment variables

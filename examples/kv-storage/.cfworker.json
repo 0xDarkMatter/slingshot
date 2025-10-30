@@ -1,0 +1,11 @@
+{
+  "worker_name": "kv-storage-example",
+  "main": "worker.js",
+  "compatibility_date": "2024-01-01",
+  "kv_namespaces": [
+    {
+      "binding": "MY_KV",
+      "id": "your_kv_namespace_id_here"
+    }
+  ]
+}

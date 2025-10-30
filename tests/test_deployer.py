@@ -2,13 +2,13 @@
 
 import pytest
 from pathlib import Path
-from cfworker.deployer import WorkerDeployer, DeploymentError
-from cfworker.config import Config
+from slingshot.deployer import WorkerDeployer, DeploymentError
+from slingshot.config import Config
 
 
 def test_deployer_initialization(temp_dir, mock_env_credentials, sample_worker_script):
     """Test deployer initialization."""
-    config = Config.create_default("test-worker", str(temp_dir / ".cfworker.json"))
+    config = Config.create_default("test-worker", str(temp_dir / ".slingshot.json"))
 
     # Create worker script
     worker_path = temp_dir / "worker.js"
@@ -29,7 +29,7 @@ def test_deployer_initialization(temp_dir, mock_env_credentials, sample_worker_s
 
 def test_deployer_invalid_config(temp_dir):
     """Test deployer with invalid configuration."""
-    config = Config.create_default("test-worker", str(temp_dir / ".cfworker.json"))
+    config = Config.create_default("test-worker", str(temp_dir / ".slingshot.json"))
 
     with pytest.raises(DeploymentError) as exc_info:
         WorkerDeployer(config)
@@ -39,7 +39,7 @@ def test_deployer_invalid_config(temp_dir):
 
 def test_read_script(temp_dir, mock_env_credentials, sample_worker_script):
     """Test reading worker script."""
-    config = Config.create_default("test-worker", str(temp_dir / ".cfworker.json"))
+    config = Config.create_default("test-worker", str(temp_dir / ".slingshot.json"))
     worker_path = temp_dir / "worker.js"
     worker_path.write_text(sample_worker_script)
 
@@ -57,7 +57,7 @@ def test_read_script(temp_dir, mock_env_credentials, sample_worker_script):
 
 def test_read_script_not_found(temp_dir, mock_env_credentials, sample_worker_script):
     """Test reading non-existent script."""
-    config = Config.create_default("test-worker", str(temp_dir / ".cfworker.json"))
+    config = Config.create_default("test-worker", str(temp_dir / ".slingshot.json"))
     worker_path = temp_dir / "worker.js"
     worker_path.write_text(sample_worker_script)
 
@@ -76,7 +76,7 @@ def test_read_script_not_found(temp_dir, mock_env_credentials, sample_worker_scr
 
 def test_prepare_metadata(temp_dir, mock_env_credentials, sample_worker_script):
     """Test preparing worker metadata."""
-    config = Config.create_default("test-worker", str(temp_dir / ".cfworker.json"))
+    config = Config.create_default("test-worker", str(temp_dir / ".slingshot.json"))
     worker_path = temp_dir / "worker.js"
     worker_path.write_text(sample_worker_script)
 
@@ -101,7 +101,7 @@ def test_prepare_metadata(temp_dir, mock_env_credentials, sample_worker_script):
 
 def test_deploy_dry_run(temp_dir, mock_env_credentials, sample_worker_script):
     """Test dry-run deployment."""
-    config = Config.create_default("test-worker", str(temp_dir / ".cfworker.json"))
+    config = Config.create_default("test-worker", str(temp_dir / ".slingshot.json"))
     worker_path = temp_dir / "worker.js"
     worker_path.write_text(sample_worker_script)
 

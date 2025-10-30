@@ -1,4 +1,4 @@
-# CFWorker
+# Slingshot
 
 A lightweight Python CLI tool for quickly deploying and managing Cloudflare Workers. Perfect for rapidly prototyping app ideas and deploying them to the edge with minimal hassle.
 
@@ -6,7 +6,7 @@ A lightweight Python CLI tool for quickly deploying and managing Cloudflare Work
 
 - Simple CLI for deploying Cloudflare Workers
 - Multiple starter templates (REST API, static site, edge function)
-- Configuration management via `.cfworker.json`
+- Configuration management via `.slingshot.json`
 - Secure credential handling with `.env` files
 - List, deploy, and manage workers from the command line
 - Zero server administration - deploy directly to Cloudflare's edge network
@@ -18,8 +18,8 @@ A lightweight Python CLI tool for quickly deploying and managing Cloudflare Work
 ### From Source
 
 ```bash
-# Clone or navigate to the CFWorker directory
-cd CFWorker
+# Clone or navigate to the Slingshot directory
+cd Slingshot
 
 # Create a virtual environment
 python -m venv venv
@@ -54,7 +54,7 @@ First, get your Cloudflare credentials:
 Then run the interactive setup:
 
 ```bash
-cfworker config-setup
+slingshot config-setup
 ```
 
 Or manually create a `.env` file:
@@ -73,7 +73,7 @@ chmod 600 .env
 
 ```bash
 # Create a new worker from a template
-cfworker init my-worker --template api
+slingshot init my-worker --template api
 
 # Available templates:
 # - api: REST API with routing
@@ -82,7 +82,7 @@ cfworker init my-worker --template api
 ```
 
 This creates:
-- `.cfworker.json` - Worker configuration
+- `.slingshot.json` - Worker configuration
 - `worker.js` - Your worker script
 - `.env` - Credentials file (if not exists)
 
@@ -90,7 +90,7 @@ This creates:
 
 ```bash
 # Deploy to Cloudflare
-cfworker deploy
+slingshot deploy
 
 # Your worker will be live at:
 # https://my-worker.workers.dev
@@ -100,13 +100,13 @@ cfworker deploy
 
 ```bash
 # List all workers
-cfworker list
+slingshot list
 
 # Get info about a specific worker
-cfworker info
+slingshot info
 
 # Delete a worker
-cfworker delete
+slingshot delete
 ```
 
 ## Usage Examples
@@ -115,38 +115,38 @@ cfworker delete
 
 ```bash
 # Initialize
-cfworker init my-api --template api
+slingshot init my-api --template api
 
 # Edit worker.js to add your endpoints
 # Deploy
-cfworker deploy
+slingshot deploy
 ```
 
 ### Example 2: Static Website
 
 ```bash
 # Initialize
-cfworker init my-site --template static
+slingshot init my-site --template static
 
 # Edit worker.js to customize your HTML
 # Deploy
-cfworker deploy
+slingshot deploy
 ```
 
 ### Example 3: Edge Function
 
 ```bash
 # Initialize
-cfworker init my-function --template edge
+slingshot init my-function --template edge
 
 # Customize the function logic
 # Deploy
-cfworker deploy
+slingshot deploy
 ```
 
 ## Configuration
 
-### `.cfworker.json`
+### `.slingshot.json`
 
 The configuration file defines your worker settings:
 
@@ -178,7 +178,7 @@ CLOUDFLARE_API_TOKEN=your_api_token
 ### Adding KV Storage
 
 1. Create a KV namespace in Cloudflare dashboard
-2. Add to `.cfworker.json`:
+2. Add to `.slingshot.json`:
 
 ```json
 {
@@ -203,7 +203,7 @@ await env.MY_KV.put('key', 'value');
 
 ## CLI Commands
 
-### `cfworker init <worker_name>`
+### `slingshot init <worker_name>`
 
 Initialize a new worker project.
 
@@ -213,10 +213,10 @@ Initialize a new worker project.
 
 **Example:**
 ```bash
-cfworker init my-worker --template api
+slingshot init my-worker --template api
 ```
 
-### `cfworker deploy`
+### `slingshot deploy`
 
 Deploy worker to Cloudflare.
 
@@ -226,11 +226,11 @@ Deploy worker to Cloudflare.
 
 **Example:**
 ```bash
-cfworker deploy
-cfworker deploy --dry-run
+slingshot deploy
+slingshot deploy --dry-run
 ```
 
-### `cfworker delete`
+### `slingshot delete`
 
 Delete worker from Cloudflare (with confirmation prompt).
 
@@ -239,10 +239,10 @@ Delete worker from Cloudflare (with confirmation prompt).
 
 **Example:**
 ```bash
-cfworker delete
+slingshot delete
 ```
 
-### `cfworker info`
+### `slingshot info`
 
 Get information about deployed worker.
 
@@ -251,10 +251,10 @@ Get information about deployed worker.
 
 **Example:**
 ```bash
-cfworker info
+slingshot info
 ```
 
-### `cfworker list`
+### `slingshot list`
 
 List all workers in your account.
 
@@ -263,23 +263,23 @@ List all workers in your account.
 
 **Example:**
 ```bash
-cfworker list
+slingshot list
 ```
 
-### `cfworker config-setup`
+### `slingshot config-setup`
 
 Interactive setup for Cloudflare credentials.
 
 **Example:**
 ```bash
-cfworker config-setup
+slingshot config-setup
 ```
 
 ## Project Structure
 
 ```
-CFWorker/
-├── cfworker/              # Main Python package
+Slingshot/
+├── slingshot/              # Main Python package
 │   ├── __init__.py
 │   ├── client.py          # Cloudflare API wrapper
 │   ├── config.py          # Configuration management
@@ -329,7 +329,7 @@ This installs the package with all development tools: pytest, pytest-cov, respon
 pytest
 
 # Run with coverage report
-pytest --cov=cfworker --cov-report=html
+pytest --cov=slingshot --cov-report=html
 
 # Run specific test file
 pytest tests/test_config.py
@@ -339,19 +339,19 @@ pytest tests/test_config.py
 
 ```bash
 # Format code with black
-black src/cfworker/ tests/
+black src/slingshot/ tests/
 
 # Check code style with ruff
-ruff check src/cfworker/ tests/
+ruff check src/slingshot/ tests/
 
 # Auto-fix ruff issues
-ruff check --fix src/cfworker/ tests/
+ruff check --fix src/slingshot/ tests/
 ```
 
 ### Project Structure
 
 The project follows the **src/ layout** for better package isolation:
-- `src/cfworker/` - Main package source code
+- `src/slingshot/` - Main package source code
 - `tests/` - Test suite with pytest
 - `templates/` - Worker templates (JavaScript)
 - `examples/` - Example projects
@@ -363,7 +363,7 @@ Check the `examples/` directory for complete working examples:
 - **hello-world**: Minimal worker example
 - **kv-storage**: Using KV storage for persistence
 
-Each example includes a `worker.js` and `.cfworker.json` you can use as reference.
+Each example includes a `worker.js` and `.slingshot.json` you can use as reference.
 
 ## Security Best Practices
 
@@ -376,7 +376,7 @@ Each example includes a `worker.js` and `.cfworker.json` you can use as referenc
 
 2. **Never Commit Secrets**: The `.gitignore` is configured to exclude:
    - `.env` and `.env.local`
-   - `.cfworker.json` (may contain environment variables)
+   - `.slingshot.json` (may contain environment variables)
 
 3. **API Token Scope**: Use API tokens with minimal required permissions:
    - Required: `Workers Scripts:Edit`
@@ -388,14 +388,14 @@ Each example includes a `worker.js` and `.cfworker.json` you can use as referenc
 
 1. **Dry Run First**: Always validate before deploying:
    ```bash
-   cfworker deploy --dry-run
+   slingshot deploy --dry-run
    ```
 
 2. **Version Control**: Commit your worker code before deploying:
    ```bash
-   git add worker.js .cfworker.json
+   git add worker.js .slingshot.json
    git commit -m "Update worker logic"
-   cfworker deploy
+   slingshot deploy
    ```
 
 3. **Test Locally**: Review worker code for sensitive data before deploying
@@ -404,7 +404,7 @@ Each example includes a `worker.js` and `.cfworker.json` you can use as referenc
 
 - API credentials are stored in plaintext in `.env` files
 - Worker scripts are deployed to Cloudflare's global network (public)
-- Environment variables in `.cfworker.json` are deployed with the worker
+- Environment variables in `.slingshot.json` are deployed with the worker
 
 ## Known Limitations
 
@@ -442,12 +442,12 @@ See [Roadmap](#roadmap) for planned improvements.
 
 - Verify your `CLOUDFLARE_ACCOUNT_ID` and `CLOUDFLARE_API_TOKEN` in `.env`
 - Ensure your API token has `Workers Scripts:Edit` permissions
-- Run `cfworker config-setup` to reconfigure
+- Run `slingshot config-setup` to reconfigure
 
 ### "Script file not found" error
 
 - Ensure `worker.js` exists in your current directory
-- Check the `main` field in `.cfworker.json` matches your script filename
+- Check the `main` field in `.slingshot.json` matches your script filename
 
 ### Deployment fails with "Script too large"
 
@@ -506,8 +506,8 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines.
 
 ```bash
 # Clone your fork
-git clone https://github.com/yourusername/CFWorker.git
-cd CFWorker
+git clone https://github.com/yourusername/Slingshot.git
+cd Slingshot
 
 # Install in development mode
 python -m venv venv
@@ -515,7 +515,7 @@ source venv/bin/activate  # or venv\Scripts\activate on Windows
 pip install -e ".[dev]"
 
 # Run tests
-pytest --cov=cfworker
+pytest --cov=slingshot
 ```
 
 ## Roadmap

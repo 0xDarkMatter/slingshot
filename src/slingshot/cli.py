@@ -1,4 +1,4 @@
-"""CLI interface for CFWorker."""
+"""CLI interface for Slingshot."""
 
 import sys
 from pathlib import Path
@@ -19,7 +19,7 @@ console = Console()
 @click.group()
 @click.version_option(version=__version__)
 def main():
-    """CFWorker - Deploy and manage Cloudflare Workers with ease."""
+    """Slingshot - Rapidly deploy and manage Cloudflare Workers with minimal hassle."""
     pass
 
 
@@ -31,14 +31,14 @@ def main():
 def init(worker_name: str, template: str, force: bool):
     """Initialize a new worker project.
 
-    Creates a .cfworker.json config file and a basic worker script from a template.
+    Creates a .slingshot.json config file and a basic worker script from a template.
     """
-    config_path = Path.cwd() / ".cfworker.json"
+    config_path = Path.cwd() / ".slingshot.json"
     worker_path = Path.cwd() / "worker.js"
 
     # Check if files already exist
     if config_path.exists() and not force:
-        console.print("[red]Error:[/red] .cfworker.json already exists. Use --force to overwrite.")
+        console.print("[red]Error:[/red] .slingshot.json already exists. Use --force to overwrite.")
         sys.exit(1)
 
     if worker_path.exists() and not force:
@@ -48,7 +48,7 @@ def init(worker_name: str, template: str, force: bool):
     # Create config file
     try:
         config = Config.create_default(worker_name, str(config_path))
-        console.print(f"[green]✓[/green] Created .cfworker.json")
+        console.print(f"[green]✓[/green] Created .slingshot.json")
     except Exception as e:
         console.print(f"[red]Error:[/red] Failed to create config: {e}")
         sys.exit(1)
@@ -81,12 +81,12 @@ def init(worker_name: str, template: str, force: bool):
 
 
 @main.command()
-@click.option('--config', '-c', default=None, help='Path to .cfworker.json config file')
+@click.option('--config', '-c', default=None, help='Path to .slingshot.json config file')
 @click.option('--dry-run', is_flag=True, help='Validate without deploying')
 def deploy(config: Optional[str], dry_run: bool):
     """Deploy worker to Cloudflare.
 
-    Reads the configuration from .cfworker.json and deploys the worker script.
+    Reads the configuration from .slingshot.json and deploys the worker script.
     """
     try:
         # Load configuration
@@ -136,7 +136,7 @@ def deploy(config: Optional[str], dry_run: bool):
 
 
 @main.command()
-@click.option('--config', '-c', default=None, help='Path to .cfworker.json config file')
+@click.option('--config', '-c', default=None, help='Path to .slingshot.json config file')
 @click.confirmation_option(prompt='Are you sure you want to delete this worker?')
 def delete(config: Optional[str]):
     """Delete worker from Cloudflare.
@@ -161,7 +161,7 @@ def delete(config: Optional[str]):
 
 
 @main.command()
-@click.option('--config', '-c', default=None, help='Path to .cfworker.json config file')
+@click.option('--config', '-c', default=None, help='Path to .slingshot.json config file')
 def info(config: Optional[str]):
     """Get information about deployed worker.
 
@@ -186,7 +186,7 @@ def info(config: Optional[str]):
 
 
 @main.command()
-@click.option('--config', '-c', default=None, help='Path to .cfworker.json config file')
+@click.option('--config', '-c', default=None, help='Path to .slingshot.json config file')
 def list(config: Optional[str]):
     """List all workers in your account.
 

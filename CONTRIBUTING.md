@@ -1,6 +1,6 @@
-# Contributing to CFWorker
+# Contributing to Slingshot
 
-Thank you for your interest in contributing to CFWorker! This document provides guidelines and instructions for contributing.
+Thank you for your interest in contributing to Slingshot! This document provides guidelines and instructions for contributing.
 
 ## Code of Conduct
 
@@ -31,12 +31,12 @@ When reporting bugs, include:
 **Environment:**
 - Python version: 3.10.5
 - OS: Ubuntu 22.04
-- CFWorker version: 0.1.0
+- Slingshot version: 0.1.0
 
 **Steps to Reproduce:**
-1. Run `cfworker init test-worker`
+1. Run `slingshot init test-worker`
 2. Edit worker.js to...
-3. Run `cfworker deploy`
+3. Run `slingshot deploy`
 
 **Expected:** Worker deploys successfully
 **Actual:** Error: ...
@@ -57,8 +57,8 @@ Feature requests are welcome! Please:
 
 1. **Fork and Clone**
    ```bash
-   git clone https://github.com/yourusername/CFWorker.git
-   cd CFWorker
+   git clone https://github.com/yourusername/Slingshot.git
+   cd Slingshot
    ```
 
 2. **Create Virtual Environment**
@@ -102,19 +102,19 @@ Feature requests are welcome! Please:
    pytest
 
    # With coverage
-   pytest --cov=cfworker --cov-report=html
+   pytest --cov=slingshot --cov-report=html
    ```
 
 3. **Format Code**
    ```bash
    # Format with black
-   black src/cfworker/ tests/
+   black src/slingshot/ tests/
 
    # Check style with ruff
-   ruff check src/cfworker/ tests/
+   ruff check src/slingshot/ tests/
 
    # Auto-fix style issues
-   ruff check --fix src/cfworker/ tests/
+   ruff check --fix src/slingshot/ tests/
    ```
 
 4. **Update Documentation**
@@ -240,7 +240,7 @@ def deploy_worker(
 
 **Test Organization:**
 - Place tests in `tests/` directory
-- Mirror source structure: `src/cfworker/client.py` → `tests/test_client.py`
+- Mirror source structure: `src/slingshot/client.py` → `tests/test_client.py`
 - Use pytest fixtures for common setup
 - Mock external APIs (use `responses` library)
 
@@ -303,8 +303,8 @@ def test_client_upload_worker_with_metadata():
 ## Project Structure
 
 ```
-CFWorker/
-├── src/cfworker/          # Source code
+Slingshot/
+├── src/slingshot/          # Source code
 │   ├── __init__.py        # Package initialization
 │   ├── cli.py             # CLI commands
 │   ├── client.py          # Cloudflare API client
@@ -365,4 +365,4 @@ By contributing, you agree that your contributions will be licensed under the MI
 
 ---
 
-Thank you for contributing to CFWorker! Your help makes this project better for everyone. 🚀
+Thank you for contributing to Slingshot! Your help makes this project better for everyone. 🚀

@@ -2,7 +2,7 @@
 
 import pytest
 import responses
-from cfworker.client import CloudflareClient, CloudflareAPIError
+from slingshot.client import CloudflareClient, CloudflareAPIError
 
 
 @pytest.fixture

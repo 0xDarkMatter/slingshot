@@ -4,7 +4,7 @@ import pytest
 from click.testing import CliRunner
 from pathlib import Path
 
-from cfworker.cli import main
+from slingshot.cli import main
 
 
 @pytest.fixture
@@ -35,9 +35,9 @@ def test_init_command(cli_runner, temp_dir):
         result = cli_runner.invoke(main, ['init', 'test-worker', '--template', 'api'])
 
         assert result.exit_code == 0
-        assert Path('.cfworker.json').exists()
+        assert Path('.slingshot.json').exists()
         assert Path('worker.js').exists()
-        assert 'Created .cfworker.json' in result.output
+        assert 'Created .slingshot.json' in result.output
         assert 'Created worker.js' in result.output
 
 
@@ -45,7 +45,7 @@ def test_init_command_force_overwrite(cli_runner, temp_dir):
     """Test init command with --force flag."""
     with cli_runner.isolated_filesystem(temp=temp_dir):
         # Create files first
-        Path('.cfworker.json').write_text('{}')
+        Path('.slingshot.json').write_text('{}')
         Path('worker.js').write_text('test')
 
         # Try without --force (should fail)
@@ -86,7 +86,7 @@ def test_deploy_dry_run(cli_runner, temp_dir, mock_env_credentials, sample_worke
 
     with cli_runner.isolated_filesystem(temp=temp_dir):
         # Setup config and worker
-        Path('.cfworker.json').write_text(json.dumps(sample_config))
+        Path('.slingshot.json').write_text(json.dumps(sample_config))
         Path('worker.js').write_text(sample_worker_script)
 
         result = cli_runner.invoke(main, ['deploy', '--dry-run'])

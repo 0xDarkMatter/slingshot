@@ -1,11 +1,17 @@
 # Changelog
 
-All notable changes to CFWorker will be documented in this file.
+All notable changes to Slingshot will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+### Changed
+- **BREAKING**: Renamed project from CFWorker to Slingshot
+- **BREAKING**: Renamed CLI command from `cfworker` to `slingshot`
+- **BREAKING**: Renamed config file from `.cfworker.json` to `.slingshot.json`
+- **BREAKING**: Renamed Python package from `cfworker` to `slingshot`
 
 ### Added
 - Comprehensive test suite with pytest (tests/ directory)
@@ -39,7 +45,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.1.0] - 2024-10-30
 
 ### Added
-- Initial release of CFWorker
+- Initial release of Slingshot
 - Python CLI tool for Cloudflare Workers deployment
 - Core commands: init, deploy, delete, list, info, config-setup
 - Cloudflare API client wrapper with full Workers API support
@@ -62,5 +68,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Dry-run deployment validation
 - Rich CLI output with colors and formatting
 
-[Unreleased]: https://github.com/yourusername/CFWorker/compare/v0.1.0...HEAD
-[0.1.0]: https://github.com/yourusername/CFWorker/releases/tag/v0.1.0
+[Unreleased]: https://github.com/yourusername/Slingshot/compare/v0.1.0...HEAD
+[0.1.0]: https://github.com/yourusername/Slingshot/releases/tag/v0.1.0

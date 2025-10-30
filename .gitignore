@@ -49,7 +49,7 @@ ENV/
 .env.local
 
 # Config
-.cfworker.json
+.slingshot.json
 
 # OS
 .DS_Store
