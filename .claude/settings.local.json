@@ -12,7 +12,9 @@
       "Bash(python -m pytest:*)",
       "Bash(cat:*)",
       "Bash(echo:*)",
-      "Bash(ls:*)"
+      "Bash(ls:*)",
+      "Bash(git remote add:*)",
+      "Bash(git push:*)"
     ],
     "deny": [],
     "ask": []
