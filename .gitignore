@@ -20,6 +20,18 @@ wheels/
 .installed.cfg
 *.egg
 
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.hypothesis/
+
+# Type checking
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
 # Virtual environments
 venv/
 env/
@@ -45,3 +57,8 @@ Thumbs.db
 
 # Logs
 *.log
+logs/
+
+# Package manager
+pip-log.txt
+pip-delete-this-directory.txt

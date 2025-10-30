@@ -4,7 +4,10 @@
       "Bash(tree:*)",
       "Bash(dir:*)",
       "Bash(test:*)",
-      "Bash(git init:*)"
+      "Bash(git init:*)",
+      "Bash(git commit -m \"$(cat <<''EOF''\nInitial commit: CFWorker MVP - Python CLI for Cloudflare Workers\n\nAdd complete MVP implementation for deploying and managing Cloudflare Workers:\n\nCore Features:\n- Python CLI tool with commands: init, deploy, delete, list, info, config-setup\n- Cloudflare API client wrapper with full Workers API support\n- Configuration management via .cfworker.json and .env files\n- Deployment logic with validation and error handling\n\nTemplates & Examples:\n- REST API template with routing and CORS support\n- Static website template with responsive HTML\n- Edge function template with request info\n- Working examples (hello-world, kv-storage)\n\nDocumentation:\n- Comprehensive README.md with full documentation\n- QUICKSTART.md for 5-minute setup\n- Cloudflare expert agent for Claude Code integration\n- MIT License\n\nProject Structure:\n- Modern Python packaging with pyproject.toml\n- Clean dependency management\n- Proper .gitignore for Python projects\n- Example configuration files\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")",
+      "Bash(git config:*)",
+      "Bash(git add:*)"
     ],
     "deny": [],
     "ask": []
