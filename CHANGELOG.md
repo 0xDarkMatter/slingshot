@@ -8,17 +8,33 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
-- Comprehensive test suite with pytest
-- Test coverage reporting
+- Comprehensive test suite with pytest (tests/ directory)
+- Test coverage reporting configuration
 - pytest configuration in pyproject.toml
 - py.typed marker for type hint support
+- CONTRIBUTING.md with detailed contribution guidelines
+- Security Best Practices section in README.md
+- Known Limitations section in README.md
+- Security notes in QUICKSTART.md
+- Development setup instructions in README.md
+- Code quality and testing documentation
 
 ### Changed
-- Updated author information in pyproject.toml
+- Updated author information in pyproject.toml (Mack <mack@roamhq.io>)
 - Enhanced development dependencies (pytest-cov, responses)
 - Migrated to src/ layout for better package isolation
 - Consolidated dependency management in pyproject.toml
 - Updated requirements.txt and requirements-dev.txt to reference pyproject.toml
+- Improved README.md with security warnings and best practices
+- Enhanced QUICKSTART.md with security considerations
+- Updated Development section with proper paths (src/cfworker/)
+- Expanded Contributing section with detailed process
+
+### Security
+- Added security warnings about .env file permissions
+- Documented credential protection best practices
+- Added deployment safety guidelines
+- Documented known security considerations
 
 ## [0.1.0] - 2024-10-30
 

@@ -10,6 +10,8 @@ A lightweight Python CLI tool for quickly deploying and managing Cloudflare Work
 - Secure credential handling with `.env` files
 - List, deploy, and manage workers from the command line
 - Zero server administration - deploy directly to Cloudflare's edge network
+- Comprehensive test suite with pytest
+- Type hint support for library usage
 
 ## Installation
 
@@ -60,6 +62,11 @@ Or manually create a `.env` file:
 ```bash
 CLOUDFLARE_ACCOUNT_ID=your_account_id_here
 CLOUDFLARE_API_TOKEN=your_api_token_here
+```
+
+**Security Note**: On Unix/Linux systems, ensure your `.env` file has restrictive permissions:
+```bash
+chmod 600 .env
 ```
 
 ### 2. Initialize a New Worker
@@ -307,24 +314,47 @@ See `.claude/agents/cloudflare-expert.md` for detailed information.
 
 ## Development
 
-### Running Tests
-
-```bash
-pytest
-```
-
-### Code Formatting
-
-```bash
-black cfworker/
-ruff check cfworker/
-```
-
 ### Installing Development Dependencies
 
 ```bash
 pip install -e ".[dev]"
 ```
+
+This installs the package with all development tools: pytest, pytest-cov, responses, black, ruff.
+
+### Running Tests
+
+```bash
+# Run all tests
+pytest
+
+# Run with coverage report
+pytest --cov=cfworker --cov-report=html
+
+# Run specific test file
+pytest tests/test_config.py
+```
+
+### Code Formatting
+
+```bash
+# Format code with black
+black src/cfworker/ tests/
+
+# Check code style with ruff
+ruff check src/cfworker/ tests/
+
+# Auto-fix ruff issues
+ruff check --fix src/cfworker/ tests/
+```
+
+### Project Structure
+
+The project follows the **src/ layout** for better package isolation:
+- `src/cfworker/` - Main package source code
+- `tests/` - Test suite with pytest
+- `templates/` - Worker templates (JavaScript)
+- `examples/` - Example projects
 
 ## Examples
 
@@ -334,6 +364,77 @@ Check the `examples/` directory for complete working examples:
 - **kv-storage**: Using KV storage for persistence
 
 Each example includes a `worker.js` and `.cfworker.json` you can use as reference.
+
+## Security Best Practices
+
+### Credential Protection
+
+1. **File Permissions**: Always set restrictive permissions on `.env` files (Unix/Linux):
+   ```bash
+   chmod 600 .env
+   ```
+
+2. **Never Commit Secrets**: The `.gitignore` is configured to exclude:
+   - `.env` and `.env.local`
+   - `.cfworker.json` (may contain environment variables)
+
+3. **API Token Scope**: Use API tokens with minimal required permissions:
+   - Required: `Workers Scripts:Edit`
+   - Avoid: Account-wide or "All" permissions
+
+4. **Token Rotation**: Regularly rotate your Cloudflare API tokens
+
+### Deployment Safety
+
+1. **Dry Run First**: Always validate before deploying:
+   ```bash
+   cfworker deploy --dry-run
+   ```
+
+2. **Version Control**: Commit your worker code before deploying:
+   ```bash
+   git add worker.js .cfworker.json
+   git commit -m "Update worker logic"
+   cfworker deploy
+   ```
+
+3. **Test Locally**: Review worker code for sensitive data before deploying
+
+### Known Security Considerations
+
+- API credentials are stored in plaintext in `.env` files
+- Worker scripts are deployed to Cloudflare's global network (public)
+- Environment variables in `.cfworker.json` are deployed with the worker
+
+## Known Limitations
+
+### Current Version (0.1.0)
+
+**API Client:**
+- No automatic retry logic for failed requests
+- No request timeout configuration (may hang on slow connections)
+- Limited rate limit tracking
+- Incomplete KV operations (only list/create namespaces)
+
+**Worker Management:**
+- No worker secrets management
+- No Durable Objects support
+- No R2 storage integration
+- No D1 database support
+- No custom domains management
+
+**Development Experience:**
+- No local development server
+- No TypeScript transpilation
+- No worker testing framework
+- No hot reload
+
+**Configuration:**
+- Limited CLI flag overrides
+- No configuration inheritance
+- No workspace/multi-project support
+
+See [Roadmap](#roadmap) for planned improvements.
 
 ## Troubleshooting
 
@@ -381,7 +482,41 @@ MIT License - See LICENSE file for details
 
 ## Contributing
 
-Contributions welcome! Please feel free to submit issues or pull requests.
+Contributions are welcome! Here's how you can help:
+
+### Reporting Issues
+
+- Use GitHub Issues to report bugs
+- Include steps to reproduce the issue
+- Provide your Python version and OS
+
+### Contributing Code
+
+1. Fork the repository
+2. Create a feature branch: `git checkout -b feature/my-feature`
+3. Make your changes
+4. Run tests: `pytest`
+5. Format code: `black src/ tests/ && ruff check src/ tests/`
+6. Commit with conventional commits: `feat: add new feature`
+7. Push and create a Pull Request
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for detailed guidelines.
+
+### Development Setup
+
+```bash
+# Clone your fork
+git clone https://github.com/yourusername/CFWorker.git
+cd CFWorker
+
+# Install in development mode
+python -m venv venv
+source venv/bin/activate  # or venv\Scripts\activate on Windows
+pip install -e ".[dev]"
+
+# Run tests
+pytest --cov=cfworker
+```
 
 ## Roadmap
 

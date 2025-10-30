@@ -58,6 +58,12 @@ CLOUDFLARE_ACCOUNT_ID=your_account_id_here
 CLOUDFLARE_API_TOKEN=your_api_token_here
 ```
 
+**Important Security Note**: On Unix/Linux systems, set restrictive permissions on your `.env` file:
+```bash
+chmod 600 .env
+```
+This prevents other users from reading your Cloudflare credentials.
+
 ## Step 3: Create Your First Worker
 
 ```bash
@@ -94,6 +100,30 @@ You should see:
   "timestamp": 1234567890
 }
 ```
+
+## Security Best Practices
+
+Before moving forward, understand these security considerations:
+
+### 1. Protect Your Credentials
+- **Never commit** `.env` files to version control (already in `.gitignore`)
+- Set restrictive permissions: `chmod 600 .env` (Unix/Linux)
+- Rotate your API tokens regularly
+
+### 2. Review Code Before Deploying
+- Check for hardcoded secrets or API keys
+- Use environment variables for sensitive data
+- Test deployments with `--dry-run` flag
+
+### 3. Use Version Control
+```bash
+# Commit before deploying
+git add worker.js .cfworker.json
+git commit -m "Update worker implementation"
+cfworker deploy
+```
+
+This allows easy rollback if something goes wrong.
 
 ## Next Steps
 
